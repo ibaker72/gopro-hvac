@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 28% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+    --primary: 216 59% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 28% 17%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 216 59% 25%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Sticky call bar pushes content down */
+  body {
+    padding-top: 44px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-orange text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition-colors duration-200 inline-flex items-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-brand-blue font-bold py-3 px-6 rounded-lg border-2 border-brand-blue hover:bg-brand-blue hover:text-white transition-colors duration-200 inline-flex items-center gap-2;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-brand-dark;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-slate-600 mt-3 max-w-2xl;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .phone-link {
+    @apply font-bold text-brand-orange hover:text-orange-600 transition-colors;
+  }
+}
+
+/* Click-to-call pulse animation for emergency sections */
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(249, 115, 22, 0); }
+}
+
+.cta-pulse {
+  animation: pulse-orange 2s infinite;
+}
