@@ -42,70 +42,59 @@ function StarRating({ count }: { count: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+        <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
       ))}
+    </div>
+  )
+}
+
+function ReviewCard({ review }: { review: typeof reviews[0] }) {
+  const initials = review.name.split(' ').map((n) => n[0]).join('')
+  return (
+    <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
+      <StarRating count={review.rating} />
+      <p className="text-slate-600 text-sm leading-relaxed mt-4 flex-1">
+        &ldquo;{review.text}&rdquo;
+      </p>
+      <div className="flex items-center justify-between mt-5 pt-4 border-t border-slate-100">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+            {initials}
+          </div>
+          <div>
+            <p className="font-bold text-brand-dark text-sm leading-tight">{review.name}</p>
+            <p className="text-slate-400 text-xs">{review.location}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <div className="w-4 h-4 rounded-full bg-[#4285F4] flex items-center justify-center">
+            <span className="text-white text-[8px] font-bold leading-none">G</span>
+          </div>
+          <span className="text-xs text-slate-400">{review.date}</span>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default function ReviewCarousel() {
   return (
-    <section className="bg-brand-light py-16 px-4">
+    <section className="bg-brand-light py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-yellow-50 text-yellow-700 border border-yellow-200 px-4 py-2 rounded-full text-sm font-bold mb-5">
             <Star size={14} className="fill-yellow-500 text-yellow-500" />
-            5.0 Average Rating — 100+ Google Reviews
+            5.0 · 100+ Google Reviews
           </div>
           <h2 className="section-title">What Our Customers Say</h2>
           <p className="section-subtitle mx-auto">
-            Don&apos;t take our word for it — here&apos;s what homeowners across Northern NJ say about Go Pro Heating &amp; Cooling.
+            Don&apos;t take our word for it — hear from Northern NJ homeowners.
           </p>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {reviews.slice(0, 3).map((review) => (
-            <div
-              key={review.name}
-              className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm card-hover"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <p className="font-bold text-brand-dark">{review.name}</p>
-                  <p className="text-sm text-slate-500">{review.location}</p>
-                </div>
-                <StarRating count={review.rating} />
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed">&ldquo;{review.text}&rdquo;</p>
-              <div className="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
-                <div className="w-5 h-5 rounded-full bg-[#4285F4] flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">G</span>
-                </div>
-                <span className="text-xs text-slate-400">Google Review · {review.date}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="hidden lg:grid grid-cols-2 gap-5 mt-5">
-          {reviews.slice(3).map((review) => (
-            <div
-              key={review.name}
-              className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm card-hover"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <p className="font-bold text-brand-dark">{review.name}</p>
-                  <p className="text-sm text-slate-500">{review.location}</p>
-                </div>
-                <StarRating count={review.rating} />
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed">&ldquo;{review.text}&rdquo;</p>
-              <div className="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
-                <div className="w-5 h-5 rounded-full bg-[#4285F4] flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">G</span>
-                </div>
-                <span className="text-xs text-slate-400">Google Review · {review.date}</span>
-              </div>
-            </div>
+          {reviews.map((review) => (
+            <ReviewCard key={review.name} review={review} />
           ))}
         </div>
       </div>

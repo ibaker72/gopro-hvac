@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, MapPin } from 'lucide-react'
 import HeroMedia from '@/components/HeroMedia'
+import ProjectImage from '@/components/ProjectImage'
 import { COMPANY } from '@/lib/constants'
 import { breadcrumbSchema } from '@/lib/schema'
 
@@ -15,6 +15,17 @@ export const metadata: Metadata = {
   alternates: { canonical: '/projects' },
 }
 
+/*
+  ─────────────────────────────────────────────────────────────────
+  TO ADD YOUR REAL PROJECT PHOTOS:
+    Place JPG files in public/images/projects/
+      project-1.jpg  →  Boiler + copper pipe install
+      project-2.jpg  →  Hydronic manifold pumps
+      project-3.jpg  →  High-efficiency furnace
+      project-4.jpg  →  Expansion tank + copper manifold
+    Recommended: 800×600px minimum, JPG format
+  ─────────────────────────────────────────────────────────────────
+*/
 const projects = [
   {
     image: '/images/projects/project-1.jpg',
@@ -59,54 +70,47 @@ export default function ProjectsPage() {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="/images/heroes/homepage-hero.jpg"
-        imageAlt="Go Pro HVAC technician working on a job in Northern NJ"
+        imageUrl="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="Go Pro HVAC technicians working on a job in Northern NJ"
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
-        className="py-14 px-4 min-h-[320px]"
+        className="py-20 px-4 min-h-[380px]"
       >
         <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange border border-brand-orange/40 px-4 py-2 rounded-full text-sm font-bold mb-5">
+            Real Work · Real Results
+          </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4">Our Work &amp; Projects</h1>
-          <p className="text-blue-200 text-lg max-w-2xl mx-auto">
-            Real installations and repairs across Northern New Jersey — every job done right the first time.
+          <p className="text-white/80 text-lg max-w-2xl mx-auto">
+            Real HVAC installations and repairs across Northern New Jersey — every job done right the first time.
           </p>
         </div>
       </HeroMedia>
 
       {/* Projects Grid */}
-      <section className="bg-brand-light py-16 px-4">
+      <section className="bg-white py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <h2 className="section-title">Recent Projects</h2>
             <p className="section-subtitle mx-auto">
               A selection of HVAC installations and service work completed by our licensed technicians.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-7">
             {projects.map((project) => (
               <div
                 key={project.title}
-                className="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 card-hover"
+                className="group bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                {/* Image slot — replace .jpg files in public/images/projects/ */}
-                <div className="relative h-64 bg-slate-100">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                  {/* Fallback label shown if image file is missing */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-slate-200 text-slate-400 text-sm font-medium select-none pointer-events-none opacity-0 [img+&]:opacity-100">
-                    Image coming soon
-                  </div>
+                {/* Image slot */}
+                <div className="relative h-64 bg-gradient-to-br from-brand-blue to-blue-900 overflow-hidden">
+                  <ProjectImage src={project.image} alt={project.title} />
                 </div>
 
-                <div className="p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="bg-brand-orange/10 text-brand-orange text-xs font-bold px-2.5 py-1 rounded-full">
+                <div className="p-6">
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <span className="bg-brand-orange/10 text-brand-orange text-xs font-bold px-3 py-1 rounded-full border border-brand-orange/20">
                       {project.tag}
                     </span>
                     <span className="flex items-center gap-1 text-slate-400 text-xs">
@@ -114,30 +118,30 @@ export default function ProjectsPage() {
                       {project.location}
                     </span>
                   </div>
-                  <h3 className="font-bold text-brand-dark text-lg mb-1">{project.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{project.desc}</p>
+                  <h3 className="font-bold text-brand-dark text-xl mb-2">{project.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{project.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <p className="text-center text-slate-500 text-sm mt-10">
-            More projects added regularly. Call us to discuss your project.
+          <p className="text-center text-slate-400 text-sm mt-12">
+            More projects added regularly as we complete jobs across Northern NJ.
           </p>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-orange py-12 px-4 text-white text-center">
+      <section className="bg-brand-orange py-14 px-4 text-white text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-black mb-3">Ready to Start Your Project?</h2>
-          <p className="text-orange-100 mb-6">
+          <h2 className="text-3xl font-black mb-3">Ready to Start Your Project?</h2>
+          <p className="text-orange-100 text-lg mb-8">
             Licensed NJ HVAC contractor serving Clifton, Paterson, Wayne, Hackensack &amp; all of Northern NJ.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={COMPANY.phoneTel}
-              className="inline-flex items-center justify-center gap-3 bg-white text-brand-orange font-black text-xl px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors"
+              className="inline-flex items-center justify-center gap-3 bg-white text-brand-orange font-black text-xl px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors shadow-lg"
             >
               <Phone size={22} />
               {COMPANY.phone}
