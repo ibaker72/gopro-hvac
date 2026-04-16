@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone, Shield, Award, Users, CheckCircle, Star } from 'lucide-react'
 import TrustBadges from '@/components/TrustBadges'
+import HeroMedia from '@/components/HeroMedia'
 import { COMPANY } from '@/lib/constants'
 import { breadcrumbSchema } from '@/lib/schema'
 
@@ -24,7 +25,14 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-blue to-blue-900 text-white py-14 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="Go Pro Heating and Cooling HVAC team in Northern NJ"
+        overlayOpacity={65}
+        gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
+        className="py-14 px-4 min-h-[380px]"
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-black mb-4">
             About Go Pro Heating &amp; Cooling
@@ -34,7 +42,7 @@ export default function AboutPage() {
             fair prices, and technical expertise throughout Northern New Jersey.
           </p>
         </div>
-      </section>
+      </HeroMedia>
 
       <TrustBadges />
 

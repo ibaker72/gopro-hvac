@@ -5,6 +5,7 @@ import { Phone, CheckCircle } from 'lucide-react'
 import FAQAccordion from '@/components/FAQAccordion'
 import TrustBadges from '@/components/TrustBadges'
 import EstimateWizard from '@/components/EstimateWizard'
+import HeroMedia from '@/components/HeroMedia'
 import { COMPANY, SERVICES_DATA, SERVICE_SLUGS } from '@/lib/constants'
 import { breadcrumbSchema, serviceSchema } from '@/lib/schema'
 
@@ -53,7 +54,14 @@ export default async function ServicePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-blue to-blue-900 text-white py-14 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80"
+        imageAlt={`${service.title} service in Northern NJ`}
+        overlayOpacity={65}
+        gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
+        className="py-14 px-4 min-h-[380px]"
+      >
         <div className="max-w-5xl mx-auto">
           <nav className="text-blue-300 text-sm mb-4">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -80,7 +88,7 @@ export default async function ServicePage({ params }: Props) {
             </Link>
           </div>
         </div>
-      </section>
+      </HeroMedia>
 
       <TrustBadges />
 

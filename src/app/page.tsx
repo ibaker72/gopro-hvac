@@ -8,6 +8,7 @@ import LeadMagnetSection from '@/components/LeadMagnetSection'
 import ReviewCarousel from '@/components/ReviewCarousel'
 import ServiceAreaGrid from '@/components/ServiceAreaGrid'
 import FAQAccordion from '@/components/FAQAccordion'
+import HeroMedia from '@/components/HeroMedia'
 import { COMPANY, HOME_FAQS } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -39,7 +40,14 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-blue via-blue-800 to-brand-dark text-white py-16 md:py-24 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="HVAC technician servicing an air conditioning unit in Northern NJ"
+        imagePriority={true}
+        overlayOpacity={60}
+        className="py-16 md:py-24 px-4 min-h-[520px]"
+      >
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -97,7 +105,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </HeroMedia>
 
       {/* Trust Badges */}
       <TrustBadges />

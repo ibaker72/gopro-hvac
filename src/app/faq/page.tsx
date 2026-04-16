@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Phone } from 'lucide-react'
 import FAQAccordion from '@/components/FAQAccordion'
+import HeroMedia from '@/components/HeroMedia'
 import { COMPANY, HOME_FAQS } from '@/lib/constants'
 import { breadcrumbSchema } from '@/lib/schema'
 import type { FAQ } from '@/types'
@@ -62,7 +63,14 @@ export default function FAQPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-blue to-blue-900 text-white py-14 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="NJ homeowner researching HVAC questions"
+        overlayOpacity={65}
+        gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
+        className="py-14 px-4 min-h-[320px]"
+      >
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-black mb-4">HVAC Frequently Asked Questions</h1>
           <p className="text-blue-200 text-lg">
@@ -73,7 +81,7 @@ export default function FAQPage() {
             </a>
           </p>
         </div>
-      </section>
+      </HeroMedia>
 
       <FAQAccordion
         faqs={allFaqs}

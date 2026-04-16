@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react'
+import HeroMedia from '@/components/HeroMedia'
 import { COMPANY } from '@/lib/constants'
 
 export default function ContactPage() {
@@ -27,14 +28,21 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-blue to-blue-900 text-white py-14 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="Contact Go Pro Heating and Cooling in Clifton NJ"
+        overlayOpacity={65}
+        gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
+        className="py-14 px-4 min-h-[320px]"
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-black mb-4">Contact Go Pro Heating &amp; Cooling</h1>
           <p className="text-blue-200 text-lg">
             Ready to schedule service or have a question? We&apos;re here to help — 24/7 for emergencies.
           </p>
         </div>
-      </section>
+      </HeroMedia>
 
       <section className="bg-brand-light py-16 px-4">
         <div className="max-w-5xl mx-auto">

@@ -78,3 +78,10 @@
 .cta-pulse {
   animation: pulse-orange 2s infinite;
 }
+
+/* Hide video backgrounds for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+}

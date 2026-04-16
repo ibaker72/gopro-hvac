@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Phone, MapPin, CheckCircle } from 'lucide-react'
 import { COMPANY } from '@/lib/constants'
 import type { CityData } from '@/types'
+import HeroMedia from '@/components/HeroMedia'
 
 interface LocationHeroProps {
   city: CityData
@@ -9,7 +10,13 @@ interface LocationHeroProps {
 
 export default function LocationHero({ city }: LocationHeroProps) {
   return (
-    <section className="bg-gradient-to-br from-brand-blue via-blue-800 to-brand-dark text-white py-16 px-4">
+    <HeroMedia
+      mode="image"
+      imageUrl="https://images.unsplash.com/photo-1570129477492-45c003dc3b7e?auto=format&fit=crop&w=1920&q=80"
+      imageAlt={`Residential neighbourhood in ${city.name}, NJ`}
+      overlayOpacity={60}
+      className="py-16 px-4 min-h-[420px]"
+    >
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-2 text-blue-300 text-sm mb-4">
           <MapPin size={14} />
@@ -56,6 +63,6 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </Link>
         </div>
       </div>
-    </section>
+    </HeroMedia>
   )
 }
