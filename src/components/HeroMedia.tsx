@@ -4,21 +4,16 @@ type HeroMediaMode = 'gradient' | 'image' | 'video'
 
 interface HeroMediaProps {
   mode: HeroMediaMode
-  /** Unsplash or Pexels static image URL */
   imageUrl?: string
   imageAlt?: string
-  /** Set true only for the above-the-fold hero (homepage). All others should be false. */
   imagePriority?: boolean
-  /** Direct .mp4 URL (e.g. from Pexels) */
   videoUrl?: string
-  /** Poster frame shown before video loads and as fallback on reduced-motion */
   videoPosterUrl?: string
-  /** Black overlay opacity 0–100. Default 60. Ensures WCAG AA contrast on white text. */
   overlayOpacity?: number
-  /** Tailwind gradient fallback used in gradient mode and as the section background colour. */
   gradientClass?: string
-  /** Additional Tailwind classes on the section (min-h, py, px, etc.) */
   className?: string
+  /** CSS object-position value: 'center' | 'top' | 'bottom' | '50% 20%' etc. */
+  objectPosition?: string
   children: React.ReactNode
 }
 
@@ -32,19 +27,19 @@ export default function HeroMedia({
   overlayOpacity = 60,
   gradientClass = 'bg-gradient-to-br from-brand-blue via-blue-800 to-brand-dark',
   className = '',
+  objectPosition = 'center',
   children,
 }: HeroMediaProps) {
-  const overlayStyle = { opacity: overlayOpacity / 100 }
-
   return (
     <section className={`relative overflow-hidden text-white ${gradientClass} ${className}`}>
-      {/* ── Background layer ─────────────────────────────────────────── */}
+      {/* ── Background layer ──────────────────────────────────────── */}
       {mode === 'image' && imageUrl && (
         <Image
           src={imageUrl}
           alt={imageAlt}
           fill
-          className="object-cover object-center"
+          className="object-cover"
+          style={{ objectPosition }}
           priority={imagePriority}
           sizes="100vw"
         />
@@ -52,13 +47,13 @@ export default function HeroMedia({
 
       {mode === 'video' && (
         <>
-          {/* Poster image behind the video — visible on reduced-motion or while video loads */}
           {videoPosterUrl && (
             <Image
               src={videoPosterUrl}
               alt={imageAlt}
               fill
-              className="object-cover object-center"
+              className="object-cover"
+              style={{ objectPosition }}
               priority={imagePriority}
               sizes="100vw"
             />
@@ -78,24 +73,19 @@ export default function HeroMedia({
         </>
       )}
 
-      {/* ── Overlays (image & video modes only) ──────────────────────── */}
+      {/* ── Overlays ──────────────────────────────────────────────── */}
       {mode !== 'gradient' && (
         <>
-          {/* Dark overlay — guarantees WCAG AA contrast for white text */}
           <div
             className="absolute inset-0 bg-black"
-            style={overlayStyle}
+            style={{ opacity: overlayOpacity / 100 }}
             aria-hidden="true"
           />
-          {/* Brand-blue tint — ties the photo to site colour identity */}
-          <div
-            className="absolute inset-0 bg-brand-blue/20"
-            aria-hidden="true"
-          />
+          <div className="absolute inset-0 bg-brand-blue/15" aria-hidden="true" />
         </>
       )}
 
-      {/* ── Foreground content ────────────────────────────────────────── */}
+      {/* ── Foreground ────────────────────────────────────────────── */}
       <div className="relative z-10">{children}</div>
     </section>
   )

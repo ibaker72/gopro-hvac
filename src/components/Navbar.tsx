@@ -32,37 +32,51 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [logoError, setLogoError] = useState(false)
 
   return (
     <nav className="bg-white border-b border-slate-200 sticky top-[44px] z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
+
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <div className="bg-brand-blue text-white font-black text-lg px-3 py-1.5 rounded">
-              GO PRO
-            </div>
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
+            {/* Shows logo image when public/images/logos/logo.png exists */}
+            {!logoError ? (
+              <img
+                src="/images/logos/logo.png"
+                alt="Go Pro Heating & Cooling"
+                className="h-10 w-auto object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="bg-brand-blue text-white font-black text-lg px-3 py-1.5 rounded-lg tracking-tight">
+                GO PRO
+              </div>
+            )}
             <div className="hidden sm:block">
               <div className="font-bold text-brand-dark text-sm leading-tight">Heating &amp; Cooling</div>
-              <div className="text-xs text-slate-500">Clifton, NJ — Lic. {COMPANY.license}</div>
+              <div className="text-xs text-slate-400">Clifton, NJ · Lic. {COMPANY.license}</div>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) =>
               link.children ? (
-                <div key={link.label} className="relative group">
+                <div key={link.label} className="relative">
                   <button
-                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-brand-blue rounded-md hover:bg-slate-50 transition-colors"
+                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-blue rounded-lg hover:bg-slate-50 transition-colors"
                     onMouseEnter={() => setServicesOpen(true)}
                     onMouseLeave={() => setServicesOpen(false)}
                   >
                     {link.label}
-                    <ChevronDown size={14} />
+                    <ChevronDown size={13} className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   <div
-                    className={`absolute top-full left-0 w-52 bg-white border border-slate-200 rounded-lg shadow-xl py-2 transition-all duration-150 ${servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1'}`}
+                    className={`absolute top-full left-0 w-52 bg-white border border-slate-200 rounded-xl shadow-xl py-2 transition-all duration-150 ${
+                      servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1'
+                    }`}
                     onMouseEnter={() => setServicesOpen(true)}
                     onMouseLeave={() => setServicesOpen(false)}
                   >
@@ -70,7 +84,7 @@ export default function Navbar() {
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-blue hover:text-white transition-colors"
+                        className="block px-4 py-2.5 text-sm text-slate-600 hover:bg-brand-blue hover:text-white transition-colors"
                       >
                         {child.label}
                       </Link>
@@ -81,7 +95,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-brand-blue rounded-md hover:bg-slate-50 transition-colors"
+                  className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-brand-blue rounded-lg hover:bg-slate-50 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -95,25 +109,25 @@ export default function Navbar() {
               href={COMPANY.phoneTel}
               className="flex items-center gap-2 text-brand-blue font-bold text-sm hover:text-brand-orange transition-colors"
             >
-              <Phone size={16} />
+              <Phone size={15} />
               {COMPANY.phone}
             </a>
             <Link
               href="/estimate"
-              className="bg-brand-orange text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+              className="bg-brand-orange text-white text-sm font-bold px-4 py-2.5 rounded-lg hover:bg-orange-600 transition-colors shadow-sm"
             >
               Free Estimate
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile button */}
           <div className="flex md:hidden items-center gap-3">
             <a href={COMPANY.phoneTel} className="text-brand-orange" aria-label="Call Now">
               <Phone size={22} />
             </a>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-700 p-1"
+              className="text-slate-600 p-1"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -123,18 +137,18 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden border-t border-slate-100 py-3 space-y-1">
+          <div className="md:hidden border-t border-slate-100 py-3 space-y-0.5">
             {navLinks.map((link) =>
               link.children ? (
                 <div key={link.label}>
-                  <p className="px-3 py-1 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <p className="px-3 py-1 text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">
                     {link.label}
                   </p>
                   {link.children.map((child) => (
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block px-5 py-2 text-sm text-slate-700 hover:text-brand-blue"
+                      className="block px-5 py-2.5 text-sm text-slate-600 hover:text-brand-blue hover:bg-slate-50 rounded-lg"
                       onClick={() => setIsOpen(false)}
                     >
                       {child.label}
@@ -145,17 +159,17 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-brand-blue"
+                  className="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50 rounded-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </Link>
               )
             )}
-            <div className="pt-3 border-t border-slate-100 px-3">
+            <div className="pt-3 border-t border-slate-100 px-3 mt-3">
               <Link
                 href="/estimate"
-                className="block w-full text-center bg-brand-orange text-white font-bold py-3 rounded-lg hover:bg-orange-600"
+                className="block w-full text-center bg-brand-orange text-white font-bold py-3.5 rounded-xl hover:bg-orange-600 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Get Free Estimate
