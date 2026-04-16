@@ -47,7 +47,7 @@ export default function HomePage() {
       */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80"
+        imageUrl="/images/heroes/homepage-hero.webp"
         imageAlt="Go Pro HVAC technician servicing an air conditioning unit in Northern NJ"
         imagePriority={true}
         objectPosition="top"
@@ -177,8 +177,7 @@ export default function HomePage() {
         Recommended: landscape, 1920×1080, JPG
       */}
       <HeroMedia
-        mode="image"
-        imageUrl="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80"
+        mode="gradient"
         imageAlt="HVAC technician with manifold gauges and tools"
         overlayOpacity={78}
         gradientClass="bg-slate-900"

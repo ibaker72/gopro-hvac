@@ -28,28 +28,28 @@ export const metadata: Metadata = {
 */
 const projects = [
   {
-    image: '/images/projects/project-1.jpg',
+    image: '/images/projects/project-1.webp',
     title: 'Boiler System Installation',
     desc: 'Full boiler replacement with new copper piping, zone valves, and pressure relief system.',
     location: 'Clifton, NJ',
     tag: 'Heating',
   },
   {
-    image: '/images/projects/project-2.jpg',
+    image: '/images/projects/project-2.webp',
     title: 'Hydronic Heating Manifold',
     desc: 'Multi-zone hydronic system with Taco pump manifold and full copper distribution piping.',
     location: 'Paterson, NJ',
     tag: 'Heating',
   },
   {
-    image: '/images/projects/project-3.jpg',
+    image: '/images/projects/project-3.webp',
     title: 'High-Efficiency Furnace Install',
     desc: 'New high-efficiency gas furnace with full ductwork connection, flue reroute, and thermostat upgrade.',
     location: 'Wayne, NJ',
     tag: 'Heating',
   },
   {
-    image: '/images/projects/project-4.jpg',
+    image: '/images/projects/project-4.webp',
     title: 'Expansion Tank & Copper Manifold',
     desc: 'Expansion tank replacement and full copper manifold rebuild for a radiant heating system.',
     location: 'Hackensack, NJ',
@@ -70,8 +70,8 @@ export default function ProjectsPage() {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80"
-        imageAlt="Go Pro HVAC technicians working on a job in Northern NJ"
+        imageUrl="/images/heroes/homepage-hero.webp"
+        imageAlt="Go Pro HVAC technician working on a job in Northern NJ"
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
         className="py-20 px-4 min-h-[380px]"
