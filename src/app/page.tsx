@@ -42,8 +42,8 @@ export default function HomePage() {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80"
-        imageAlt="HVAC technician servicing an air conditioning unit in Northern NJ"
+        imageUrl="/images/heroes/homepage-hero.jpg"
+        imageAlt="Go Pro HVAC technician servicing an air conditioning unit in Northern NJ"
         imagePriority={true}
         overlayOpacity={60}
         className="py-16 md:py-24 px-4 min-h-[520px]"
@@ -151,11 +151,18 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-brand-light py-16 px-4">
+      <HeroMedia
+        mode="image"
+        imageUrl="/images/why-us-bg.jpg"
+        imageAlt="HVAC technician with manifold gauges and tools"
+        overlayOpacity={75}
+        gradientClass="bg-slate-900"
+        className="py-16 px-4"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="section-title">Why Northern NJ Homeowners Choose Go Pro</h2>
-            <p className="section-subtitle mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Why Northern NJ Homeowners Choose Go Pro</h2>
+            <p className="text-lg text-blue-200 mt-3 max-w-2xl mx-auto">
               We&apos;ve built our reputation one satisfied customer at a time across Passaic, Bergen &amp; Essex counties.
             </p>
           </div>
@@ -173,7 +180,7 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </HeroMedia>
 
       {/* Emergency Banner */}
       <EmergencyBanner />

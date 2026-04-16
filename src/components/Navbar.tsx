@@ -24,6 +24,7 @@ const navLinks = [
   },
   { label: 'Locations', href: '/locations/clifton' },
   { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },
 ]
