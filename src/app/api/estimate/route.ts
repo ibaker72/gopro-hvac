@@ -1,18 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { sendEstimateNotification, sendEstimateConfirmation } from '@/lib/resend'
 import { fireOpenClawWebhook } from '@/lib/webhook'
 import { calculateEstimate } from '@/lib/pricing'
 
+const EstimateSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email().max(200),
+  phone: z.string().min(7).max(20),
+  city: z.string().min(1).max(100),
+  serviceType: z.string().min(1).max(100),
+  homeSize: z.string().min(1).max(100),
+  systemAge: z.string().min(1).max(100),
+  urgency: z.enum(['Emergency (today)', 'This week', 'Flexible']),
+  notes: z.string().max(2000).optional(),
+  website: z.string().max(0).optional(),
+})
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, city, serviceType, homeSize, systemAge, urgency, notes } = body
 
-    // Validate required fields
-    if (!name || !email || !phone || !city || !serviceType || !homeSize || !systemAge || !urgency) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    // Silent honeypot rejection
+    if (body.website) {
+      return NextResponse.json({ success: true, estimatedMin: 0, estimatedMax: 0 })
     }
+
+    const parsed = EstimateSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    }
+
+    const { name, email, phone, city, serviceType, homeSize, systemAge, urgency, notes } = parsed.data
 
     // Calculate estimate
     const { estimatedMin, estimatedMax } = calculateEstimate(serviceType, homeSize, systemAge, urgency)
@@ -36,7 +56,6 @@ export async function POST(request: NextRequest) {
 
     if (dbError) {
       console.error('[Estimate API] DB error:', dbError)
-      // Don't block response — still send emails
     }
 
     // Send emails (parallel, don't block on errors)

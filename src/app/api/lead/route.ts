@@ -1,17 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
 import { sendChecklistWelcome } from '@/lib/resend'
 import { fireOpenClawWebhook } from '@/lib/webhook'
 
+const LeadSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email().max(200),
+  phone: z.string().max(20).optional(),
+  source: z.enum(['contact', 'checklist', 'checklist-homepage', 'estimate', 'location']),
+  city: z.string().max(100).optional(),
+  notes: z.string().max(2000).optional(),
+  website: z.string().max(0).optional(),
+})
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, source, city, notes } = body
 
-    // Validate required fields
-    if (!name || !email || !source) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    // Silent honeypot rejection
+    if (body.website) {
+      return NextResponse.json({ success: true })
     }
+
+    const parsed = LeadSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    }
+
+    const { name, email, phone, source, city, notes } = parsed.data
 
     // Save to Supabase
     const supabase = createServerSupabaseClient()

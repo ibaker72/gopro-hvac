@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { CheckCircle, ChevronRight, ChevronLeft, Phone, Loader2 } from 'lucide-react'
 import { COMPANY } from '@/lib/constants'
+import { GA } from '@/lib/analytics'
 
 type Step = 1 | 2 | 3 | 4 | 5 | 'success'
 
@@ -57,6 +58,7 @@ export default function EstimateWizard() {
     serviceType: '', homeSize: '', systemAge: '', urgency: '',
     name: '', email: '', phone: '', city: '', notes: '',
   })
+  const [honeypot, setHoneypot] = useState('')
   const [result, setResult] = useState<{ min: number; max: number } | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -65,18 +67,23 @@ export default function EstimateWizard() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (honeypot) {
+      setStep('success')
+      return
+    }
     setLoading(true)
     setError('')
     try {
       const res = await fetch('/api/estimate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, website: honeypot }),
       })
       const json = await res.json()
       if (!res.ok) throw new Error(json.error || 'Failed to submit')
       setResult({ min: json.estimatedMin, max: json.estimatedMax })
       setStep('success')
+      GA.estimateSubmit(data.serviceType, data.urgency)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
@@ -126,7 +133,11 @@ export default function EstimateWizard() {
             {SERVICE_OPTIONS.map((opt) => (
               <button
                 key={opt.label}
-                onClick={() => { setData({ ...data, serviceType: opt.label }); setStep(2) }}
+                onClick={() => {
+                  setData({ ...data, serviceType: opt.label })
+                  setStep(2)
+                  GA.estimateStepComplete(1, opt.label)
+                }}
                 className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all hover:border-brand-orange hover:bg-orange-50 ${
                   data.serviceType === opt.label ? 'border-brand-orange bg-orange-50' : 'border-slate-200'
                 }`}
@@ -144,7 +155,11 @@ export default function EstimateWizard() {
             {SIZE_OPTIONS.map((opt) => (
               <button
                 key={opt.label}
-                onClick={() => { setData({ ...data, homeSize: opt.label }); setStep(3) }}
+                onClick={() => {
+                  setData({ ...data, homeSize: opt.label })
+                  setStep(3)
+                  GA.estimateStepComplete(2, opt.label)
+                }}
                 className={`flex flex-col items-start p-4 rounded-xl border-2 text-left transition-all hover:border-brand-orange hover:bg-orange-50 ${
                   data.homeSize === opt.label ? 'border-brand-orange bg-orange-50' : 'border-slate-200'
                 }`}
@@ -162,7 +177,11 @@ export default function EstimateWizard() {
             {AGE_OPTIONS.map((opt) => (
               <button
                 key={opt.label}
-                onClick={() => { setData({ ...data, systemAge: opt.label }); setStep(4) }}
+                onClick={() => {
+                  setData({ ...data, systemAge: opt.label })
+                  setStep(4)
+                  GA.estimateStepComplete(3, opt.label)
+                }}
                 className={`flex flex-col items-start p-4 rounded-xl border-2 text-left transition-all hover:border-brand-orange hover:bg-orange-50 ${
                   data.systemAge === opt.label ? 'border-brand-orange bg-orange-50' : 'border-slate-200'
                 }`}
@@ -180,7 +199,11 @@ export default function EstimateWizard() {
             {URGENCY_OPTIONS.map((opt) => (
               <button
                 key={opt.label}
-                onClick={() => { setData({ ...data, urgency: opt.label }); setStep(5) }}
+                onClick={() => {
+                  setData({ ...data, urgency: opt.label })
+                  setStep(5)
+                  GA.estimateStepComplete(4, opt.label)
+                }}
                 className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all hover:shadow-md ${
                   data.urgency === opt.label ? opt.color + ' border-opacity-100' : 'border-slate-200 hover:' + opt.color
                 } ${data.urgency === opt.label ? opt.color : ''}`}
@@ -198,6 +221,17 @@ export default function EstimateWizard() {
         {/* Step 5: Contact Info */}
         {step === 5 && (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Honeypot — hidden from real users */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ display: 'none' }}
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+            />
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -313,12 +347,20 @@ export default function EstimateWizard() {
               <p className="text-sm text-slate-600 mt-1">
                 Can&apos;t wait? Call us directly:
               </p>
-              <a href={COMPANY.phoneTel} className="font-black text-brand-orange text-lg">
+              <a
+                href={COMPANY.phoneTel}
+                onClick={() => GA.phoneClick('estimate_success')}
+                className="font-black text-brand-orange text-lg"
+              >
                 {COMPANY.phone}
               </a>
             </div>
             <button
-              onClick={() => { setStep(1); setData({ serviceType: '', homeSize: '', systemAge: '', urgency: '', name: '', email: '', phone: '', city: '', notes: '' }); setResult(null) }}
+              onClick={() => {
+                setStep(1)
+                setData({ serviceType: '', homeSize: '', systemAge: '', urgency: '', name: '', email: '', phone: '', city: '', notes: '' })
+                setResult(null)
+              }}
               className="text-sm text-slate-500 hover:text-brand-blue underline"
             >
               Submit another estimate
@@ -331,7 +373,11 @@ export default function EstimateWizard() {
       {step !== 'success' && (
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
           <p className="text-xs text-slate-500">Prefer to talk to someone?</p>
-          <a href={COMPANY.phoneTel} className="flex items-center gap-1.5 text-brand-orange font-bold text-sm hover:text-orange-600">
+          <a
+            href={COMPANY.phoneTel}
+            onClick={() => GA.phoneClick('estimate_wizard_footer')}
+            className="flex items-center gap-1.5 text-brand-orange font-bold text-sm hover:text-orange-600"
+          >
             <Phone size={14} />
             {COMPANY.phone}
           </a>

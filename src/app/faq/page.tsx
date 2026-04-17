@@ -4,7 +4,7 @@ import { Phone } from 'lucide-react'
 import FAQAccordion from '@/components/FAQAccordion'
 import HeroMedia from '@/components/HeroMedia'
 import { COMPANY, HOME_FAQS } from '@/lib/constants'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, faqSchema } from '@/lib/schema'
 import type { FAQ } from '@/types'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
@@ -58,9 +58,12 @@ export default function FAQPage() {
     { name: 'FAQ', url: `${siteUrl}/faq` },
   ])
 
+  const faq = faqSchema(allFaqs)
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
       {/* Hero */}
       <HeroMedia

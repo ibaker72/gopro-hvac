@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { CheckCircle, Download, FileText } from 'lucide-react'
 import { COMPANY } from '@/lib/constants'
+import { GA } from '@/lib/analytics'
 
 export default function LeadMagnetSection() {
   const [formData, setFormData] = useState({ name: '', email: '' })
+  const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
 
@@ -20,16 +22,21 @@ export default function LeadMagnetSection() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!formData.name || !formData.email) return
+    if (honeypot) {
+      setStatus('success')
+      return
+    }
 
     setStatus('loading')
     try {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'checklist-homepage' }),
+        body: JSON.stringify({ ...formData, source: 'checklist-homepage', website: honeypot }),
       })
       if (!res.ok) throw new Error('Failed')
       setStatus('success')
+      GA.checklistDownload('homepage_lead_magnet')
     } catch {
       setError('Something went wrong. Please try again.')
       setStatus('error')
@@ -74,6 +81,7 @@ export default function LeadMagnetSection() {
                 </p>
                 <a
                   href="/hvac-maintenance-checklist.pdf"
+                  onClick={() => GA.checklistDownload('homepage_direct_download')}
                   className="inline-flex items-center gap-2 bg-brand-orange text-white font-bold px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   <Download size={16} />
@@ -81,7 +89,11 @@ export default function LeadMagnetSection() {
                 </a>
                 <p className="text-xs text-slate-400 mt-4">
                   Want a professional inspection?{' '}
-                  <a href={COMPANY.phoneTel} className="text-brand-orange hover:underline">
+                  <a
+                    href={COMPANY.phoneTel}
+                    onClick={() => GA.phoneClick('lead_magnet_success')}
+                    className="text-brand-orange hover:underline"
+                  >
                     Call {COMPANY.phone}
                   </a>
                 </p>
@@ -91,6 +103,17 @@ export default function LeadMagnetSection() {
                 <h3 className="font-black text-xl text-brand-dark mb-1">Get Your Free Copy</h3>
                 <p className="text-slate-500 text-sm mb-5">Instant email delivery. No spam, ever.</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot — hidden from real users */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ display: 'none' }}
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">
                       First Name <span className="text-red-500">*</span>

@@ -325,14 +325,34 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
 }
 
 export const CITIES_DATA: Record<string, CityData> = {
+  // Passaic County
   clifton: { slug: 'clifton', name: 'Clifton', county: 'Passaic', zip: '07011' },
   paterson: { slug: 'paterson', name: 'Paterson', county: 'Passaic', zip: '07501' },
   passaic: { slug: 'passaic', name: 'Passaic', county: 'Passaic', zip: '07055' },
   wayne: { slug: 'wayne', name: 'Wayne', county: 'Passaic', zip: '07470' },
+  'little-falls': { slug: 'little-falls', name: 'Little Falls', county: 'Passaic', zip: '07424' },
+  totowa: { slug: 'totowa', name: 'Totowa', county: 'Passaic', zip: '07512' },
+  'woodland-park': { slug: 'woodland-park', name: 'Woodland Park', county: 'Passaic', zip: '07424' },
+  haledon: { slug: 'haledon', name: 'Haledon', county: 'Passaic', zip: '07508' },
+  'north-haledon': { slug: 'north-haledon', name: 'North Haledon', county: 'Passaic', zip: '07508' },
+  'prospect-park': { slug: 'prospect-park', name: 'Prospect Park', county: 'Passaic', zip: '07508' },
+  'pompton-lakes': { slug: 'pompton-lakes', name: 'Pompton Lakes', county: 'Passaic', zip: '07442' },
+  wanaque: { slug: 'wanaque', name: 'Wanaque', county: 'Passaic', zip: '07465' },
+  // Essex County
   nutley: { slug: 'nutley', name: 'Nutley', county: 'Essex', zip: '07110' },
   bloomfield: { slug: 'bloomfield', name: 'Bloomfield', county: 'Essex', zip: '07003' },
   montclair: { slug: 'montclair', name: 'Montclair', county: 'Essex', zip: '07042' },
   'west-orange': { slug: 'west-orange', name: 'West Orange', county: 'Essex', zip: '07052' },
+  newark: { slug: 'newark', name: 'Newark', county: 'Essex', zip: '07102' },
+  'east-orange': { slug: 'east-orange', name: 'East Orange', county: 'Essex', zip: '07017' },
+  'south-orange': { slug: 'south-orange', name: 'South Orange', county: 'Essex', zip: '07079' },
+  maplewood: { slug: 'maplewood', name: 'Maplewood', county: 'Essex', zip: '07040' },
+  belleville: { slug: 'belleville', name: 'Belleville', county: 'Essex', zip: '07109' },
+  'glen-ridge': { slug: 'glen-ridge', name: 'Glen Ridge', county: 'Essex', zip: '07028' },
+  'cedar-grove': { slug: 'cedar-grove', name: 'Cedar Grove', county: 'Essex', zip: '07009' },
+  verona: { slug: 'verona', name: 'Verona', county: 'Essex', zip: '07044' },
+  caldwell: { slug: 'caldwell', name: 'Caldwell', county: 'Essex', zip: '07006' },
+  // Bergen County
   hackensack: { slug: 'hackensack', name: 'Hackensack', county: 'Bergen', zip: '07601' },
   paramus: { slug: 'paramus', name: 'Paramus', county: 'Bergen', zip: '07652' },
   'fair-lawn': { slug: 'fair-lawn', name: 'Fair Lawn', county: 'Bergen', zip: '07410' },
@@ -342,6 +362,26 @@ export const CITIES_DATA: Record<string, CityData> = {
   englewood: { slug: 'englewood', name: 'Englewood', county: 'Bergen', zip: '07631' },
   ridgewood: { slug: 'ridgewood', name: 'Ridgewood', county: 'Bergen', zip: '07450' },
   bergenfield: { slug: 'bergenfield', name: 'Bergenfield', county: 'Bergen', zip: '07621' },
+  'fort-lee': { slug: 'fort-lee', name: 'Fort Lee', county: 'Bergen', zip: '07024' },
+  'cliffside-park': { slug: 'cliffside-park', name: 'Cliffside Park', county: 'Bergen', zip: '07010' },
+  'palisades-park': { slug: 'palisades-park', name: 'Palisades Park', county: 'Bergen', zip: '07650' },
+  edgewater: { slug: 'edgewater', name: 'Edgewater', county: 'Bergen', zip: '07020' },
+  mahwah: { slug: 'mahwah', name: 'Mahwah', county: 'Bergen', zip: '07430' },
+  ramsey: { slug: 'ramsey', name: 'Ramsey', county: 'Bergen', zip: '07446' },
+  'saddle-brook': { slug: 'saddle-brook', name: 'Saddle Brook', county: 'Bergen', zip: '07663' },
+  // Morris County
+  parsippany: { slug: 'parsippany', name: 'Parsippany', county: 'Morris', zip: '07054' },
+  'morris-plains': { slug: 'morris-plains', name: 'Morris Plains', county: 'Morris', zip: '07950' },
+  morristown: { slug: 'morristown', name: 'Morristown', county: 'Morris', zip: '07960' },
+  rockaway: { slug: 'rockaway', name: 'Rockaway', county: 'Morris', zip: '07866' },
+  denville: { slug: 'denville', name: 'Denville', county: 'Morris', zip: '07834' },
+  // Hudson County
+  'jersey-city': { slug: 'jersey-city', name: 'Jersey City', county: 'Hudson', zip: '07302' },
+  'union-city': { slug: 'union-city', name: 'Union City', county: 'Hudson', zip: '07087' },
+  'west-new-york': { slug: 'west-new-york', name: 'West New York', county: 'Hudson', zip: '07093' },
+  secaucus: { slug: 'secaucus', name: 'Secaucus', county: 'Hudson', zip: '07094' },
+  kearny: { slug: 'kearny', name: 'Kearny', county: 'Hudson', zip: '07032' },
+  bayonne: { slug: 'bayonne', name: 'Bayonne', county: 'Hudson', zip: '07002' },
 }
 
 export const SERVICE_SLUGS = Object.keys(SERVICES_DATA)

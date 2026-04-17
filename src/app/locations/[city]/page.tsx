@@ -7,7 +7,7 @@ import TrustBadges from '@/components/TrustBadges'
 import EstimateWizard from '@/components/EstimateWizard'
 import FAQAccordion from '@/components/FAQAccordion'
 import { COMPANY, CITIES_DATA, CITY_SLUGS, SERVICES_DATA, SERVICE_SLUGS } from '@/lib/constants'
-import { breadcrumbSchema } from '@/lib/schema'
+import { breadcrumbSchema, serviceAreaSchema } from '@/lib/schema'
 import type { FAQ } from '@/types'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
@@ -65,9 +65,12 @@ export default async function LocationPage({ params }: Props) {
 
   const cityFAQs = getCityFAQs(city.name)
 
+  const serviceArea = serviceAreaSchema(city)
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceArea) }} />
 
       {/* Hero */}
       <LocationHero city={city} />
