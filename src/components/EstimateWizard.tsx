@@ -7,6 +7,17 @@ import { GA } from '@/lib/analytics'
 
 type Step = 1 | 2 | 3 | 4 | 5 | 'success'
 
+const SERVICE_SLUG_TO_LABEL: Record<string, string> = {
+  'ac-repair': 'AC Repair',
+  'ac-installation': 'AC Installation',
+  'heating-repair': 'Heating Repair',
+  'furnace-installation': 'Furnace Installation',
+  'hvac-tune-up': 'Tune-Up',
+  'ductless-mini-split': 'Ductwork',
+  'emergency-hvac': 'Emergency',
+  'duct-cleaning': 'Ductwork',
+}
+
 interface WizardData {
   serviceType: string
   homeSize: string
@@ -52,10 +63,11 @@ const URGENCY_OPTIONS = [
 
 const STEP_TITLES = ['', 'What service do you need?', 'What is your home size?', 'How old is your system?', 'How urgent is this?', 'Get your free estimate']
 
-export default function EstimateWizard() {
-  const [step, setStep] = useState<Step>(1)
+export default function EstimateWizard({ defaultService }: { defaultService?: string } = {}) {
+  const prefilled = defaultService ? (SERVICE_SLUG_TO_LABEL[defaultService] ?? '') : ''
+  const [step, setStep] = useState<Step>(prefilled ? 2 : 1)
   const [data, setData] = useState<WizardData>({
-    serviceType: '', homeSize: '', systemAge: '', urgency: '',
+    serviceType: prefilled, homeSize: '', systemAge: '', urgency: '',
     name: '', email: '', phone: '', city: '', notes: '',
   })
   const [honeypot, setHoneypot] = useState('')

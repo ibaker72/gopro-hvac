@@ -6,7 +6,7 @@ import FAQAccordion from '@/components/FAQAccordion'
 import TrustBadges from '@/components/TrustBadges'
 import EstimateWizard from '@/components/EstimateWizard'
 import HeroMedia from '@/components/HeroMedia'
-import { COMPANY, SERVICES_DATA, SERVICE_SLUGS } from '@/lib/constants'
+import { COMPANY, SERVICES_DATA, SERVICE_SLUGS, CITIES_DATA, CITY_SLUGS } from '@/lib/constants'
 import { breadcrumbSchema, serviceSchema } from '@/lib/schema'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
@@ -161,6 +161,29 @@ export default async function ServicePage({ params }: Props) {
           subtitle={`Common questions about ${service.title.toLowerCase()} in Northern NJ.`}
         />
       )}
+
+      {/* Cities We Serve */}
+      <section className="bg-brand-light py-12 px-4 border-t border-slate-100">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-xl font-bold text-brand-dark mb-2">
+            {service.title} Throughout Northern NJ
+          </h2>
+          <p className="text-slate-500 text-sm mb-6">
+            We provide {service.title.toLowerCase()} in every city and town we serve.
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {CITY_SLUGS.map((citySlug) => (
+              <Link
+                key={citySlug}
+                href={`/locations/${citySlug}/${slug}`}
+                className="text-sm bg-white border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg hover:border-brand-orange hover:text-brand-orange transition-colors"
+              >
+                {service.title} in {CITIES_DATA[citySlug].name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="bg-brand-orange py-12 px-4 text-white text-center">

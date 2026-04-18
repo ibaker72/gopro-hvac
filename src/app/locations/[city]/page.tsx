@@ -95,7 +95,7 @@ export default async function LocationPage({ params }: Props) {
                 {SERVICE_SLUGS.map((slug) => (
                   <Link
                     key={slug}
-                    href={`/services/${slug}`}
+                    href={`/locations/${citySlug}/${slug}`}
                     className="flex items-center gap-3 bg-brand-light border border-slate-200 rounded-lg px-4 py-3 hover:border-brand-orange hover:bg-orange-50 transition-all group"
                   >
                     <CheckCircle size={16} className="text-brand-orange flex-shrink-0" />

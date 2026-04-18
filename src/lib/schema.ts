@@ -1,5 +1,5 @@
 import { COMPANY, CITY_SLUGS, CITIES_DATA } from './constants'
-import type { CityData } from '@/types'
+import type { CityData, ServiceData } from '@/types'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
 
@@ -187,6 +187,38 @@ export function blogPostingSchema(post: {
     mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
     articleSection: post.category,
     image: `${siteUrl}/og-image.jpg`,
+  }
+}
+
+export function cityServiceSchema(city: CityData, service: ServiceData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${service.title} in ${city.name}, NJ`,
+    description: service.description,
+    provider: {
+      '@type': 'LocalBusiness',
+      '@id': `${siteUrl}/#business`,
+      name: COMPANY.name,
+      telephone: `+1${COMPANY.phoneRaw}`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: COMPANY.street,
+        addressLocality: COMPANY.city,
+        addressRegion: COMPANY.state,
+        postalCode: COMPANY.zip,
+        addressCountry: 'US',
+      },
+    },
+    areaServed: {
+      '@type': 'City',
+      name: `${city.name}, NJ`,
+      containedInPlace: {
+        '@type': 'AdministrativeArea',
+        name: `${city.county} County, NJ`,
+      },
+    },
+    url: `${siteUrl}/locations/${city.slug}/${service.slug}`,
   }
 }
 
