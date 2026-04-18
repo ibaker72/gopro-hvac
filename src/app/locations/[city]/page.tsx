@@ -6,9 +6,13 @@ import LocationHero from '@/components/LocationHero'
 import TrustBadges from '@/components/TrustBadges'
 import EstimateWizard from '@/components/EstimateWizard'
 import FAQAccordion from '@/components/FAQAccordion'
+import RecentWork from '@/components/RecentWork'
 import { COMPANY, CITIES_DATA, CITY_SLUGS, SERVICES_DATA, SERVICE_SLUGS } from '@/lib/constants'
 import { breadcrumbSchema, serviceAreaSchema } from '@/lib/schema'
+import { getRecentProjects } from '@/lib/projects'
 import type { FAQ } from '@/types'
+
+export const revalidate = 3600
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
 
@@ -65,7 +69,8 @@ export default async function LocationPage({ params }: Props) {
 
   const cityFAQs = getCityFAQs(city.name)
 
-  const serviceArea = serviceAreaSchema(city)
+  const { projects, isCitySpecific } = await getRecentProjects(citySlug)
+  const serviceArea = serviceAreaSchema(city, projects[0]?.image_url)
 
   return (
     <>
@@ -108,6 +113,9 @@ export default async function LocationPage({ params }: Props) {
                   </Link>
                 ))}
               </div>
+
+              {/* Recent job proof photos */}
+              <RecentWork projects={projects} cityName={city.name} isCitySpecific={isCitySpecific} />
 
               {/* Map placeholder */}
               <div className="bg-slate-100 border border-slate-200 rounded-xl overflow-hidden mb-6">

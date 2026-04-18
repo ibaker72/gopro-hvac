@@ -190,12 +190,13 @@ export function blogPostingSchema(post: {
   }
 }
 
-export function cityServiceSchema(city: CityData, service: ServiceData) {
+export function cityServiceSchema(city: CityData, service: ServiceData, imageUrl?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: `${service.title} in ${city.name}, NJ`,
     description: service.description,
+    ...(imageUrl ? { image: imageUrl } : {}),
     provider: {
       '@type': 'LocalBusiness',
       '@id': `${siteUrl}/#business`,
@@ -222,7 +223,7 @@ export function cityServiceSchema(city: CityData, service: ServiceData) {
   }
 }
 
-export function serviceAreaSchema(city: CityData) {
+export function serviceAreaSchema(city: CityData, imageUrl?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -230,6 +231,7 @@ export function serviceAreaSchema(city: CityData) {
     name: COMPANY.name,
     url: `${siteUrl}/locations/${city.slug}`,
     telephone: `+1${COMPANY.phoneRaw}`,
+    ...(imageUrl ? { image: imageUrl } : {}),
     areaServed: {
       '@type': 'City',
       name: `${city.name}, NJ`,

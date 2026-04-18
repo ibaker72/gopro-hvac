@@ -5,9 +5,13 @@ import { Phone, CheckCircle, MapPin, ArrowRight } from 'lucide-react'
 import TrustBadges from '@/components/TrustBadges'
 import EstimateWizard from '@/components/EstimateWizard'
 import FAQAccordion from '@/components/FAQAccordion'
+import RecentWork from '@/components/RecentWork'
 import { COMPANY, CITIES_DATA, CITY_SLUGS, SERVICES_DATA, SERVICE_SLUGS } from '@/lib/constants'
 import { breadcrumbSchema, cityServiceSchema } from '@/lib/schema'
+import { getRecentProjects } from '@/lib/projects'
 import type { FAQ } from '@/types'
+
+export const revalidate = 3600
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
 
@@ -87,6 +91,8 @@ export default async function CityServicePage({ params }: Props) {
     COUNTY_CONTEXT[city.county] ??
     `Go Pro Heating & Cooling proudly serves ${city.name} and all of ${city.county} County with fast, professional HVAC service.`
 
+  const { projects, isCitySpecific } = await getRecentProjects(citySlug, serviceSlug)
+
   const breadcrumb = breadcrumbSchema([
     { name: 'Home', url: siteUrl },
     { name: 'Locations', url: `${siteUrl}/locations/clifton` },
@@ -94,7 +100,7 @@ export default async function CityServicePage({ params }: Props) {
     { name: service.title, url: `${siteUrl}/locations/${citySlug}/${serviceSlug}` },
   ])
 
-  const schema = cityServiceSchema(city, service)
+  const schema = cityServiceSchema(city, service, projects[0]?.image_url)
 
   return (
     <>
@@ -163,6 +169,9 @@ export default async function CityServicePage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+
+              {/* Recent job proof photos */}
+              <RecentWork projects={projects} cityName={city.name} isCitySpecific={isCitySpecific} />
 
               {/* City context */}
               <div className="bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-5 mb-8">
