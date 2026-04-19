@@ -85,3 +85,16 @@
     display: none;
   }
 }
+
+/* Admin page: suppress site nav/footer and call bar */
+body.admin-page {
+  padding-top: 0 !important;
+}
+body.admin-page nav,
+body.admin-page footer {
+  display: none !important;
+}
+/* Hide the sticky call bar (fixed-position div rendered before nav) */
+body.admin-page > div:first-child {
+  display: none !important;
+}
