@@ -12,7 +12,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
   return (
     <HeroMedia
       mode="image"
-      imageUrl="https://images.unsplash.com/photo-K5KxSL-sT7s?auto=format&fit=crop&w=1920&q=80"
+      imageUrl="/images/heroes/homepage-hero.webp"
       imageAlt={`Residential neighbourhood in ${city.name}, NJ`}
       overlayOpacity={60}
       className="py-16 px-4 min-h-[420px]"

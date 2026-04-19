@@ -11,17 +11,19 @@ import { breadcrumbSchema, serviceSchema } from '@/lib/schema'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
 
+const DEFAULT_SERVICE_IMAGE = '/images/heroes/homepage-hero.webp'
+
 const SERVICE_IMAGES: Record<string, string> = {
-  'ac-repair':           'https://images.unsplash.com/photo-JsPkVrHMQoo?auto=format&fit=crop&w=1920&q=80',
-  'ac-installation':     'https://images.unsplash.com/photo-JUAVCUMY008?auto=format&fit=crop&w=1920&q=80',
-  'heating-repair':      'https://images.unsplash.com/photo-aPIlltz21OI?auto=format&fit=crop&w=1920&q=80',
-  'furnace-installation':'https://images.unsplash.com/photo-TkcnKFXU1aU?auto=format&fit=crop&w=1920&q=80',
-  'heat-pump':           'https://images.unsplash.com/photo-NUbkugvpD1M?auto=format&fit=crop&w=1920&q=80',
-  'ductless-mini-split': 'https://images.unsplash.com/photo-1KNFO2dpoiM?auto=format&fit=crop&w=1920&q=80',
-  'duct-cleaning':       'https://images.unsplash.com/photo-OGV99Jhhvro?auto=format&fit=crop&w=1920&q=80',
-  'hvac-tune-up':        'https://images.unsplash.com/photo-6dCFBWET48s?auto=format&fit=crop&w=1920&q=80',
-  'emergency-hvac':      'https://images.unsplash.com/photo-E5S7Aks1fFY?auto=format&fit=crop&w=1920&q=80',
-  'commercial-hvac':     'https://images.unsplash.com/photo-vvDUCfhiDpE?auto=format&fit=crop&w=1920&q=80',
+  'ac-repair': DEFAULT_SERVICE_IMAGE,
+  'ac-installation': DEFAULT_SERVICE_IMAGE,
+  'heating-repair': DEFAULT_SERVICE_IMAGE,
+  'furnace-installation': DEFAULT_SERVICE_IMAGE,
+  'heat-pump': DEFAULT_SERVICE_IMAGE,
+  'ductless-mini-split': DEFAULT_SERVICE_IMAGE,
+  'duct-cleaning': DEFAULT_SERVICE_IMAGE,
+  'hvac-tune-up': DEFAULT_SERVICE_IMAGE,
+  'emergency-hvac': DEFAULT_SERVICE_IMAGE,
+  'commercial-hvac': DEFAULT_SERVICE_IMAGE,
 }
 
 interface Props {
@@ -69,7 +71,7 @@ export default async function ServicePage({ params }: Props) {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl={SERVICE_IMAGES[slug] ?? 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80'}
+        imageUrl={SERVICE_IMAGES[slug] ?? DEFAULT_SERVICE_IMAGE}
         imageAlt={`${service.title} service in Northern NJ`}
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"

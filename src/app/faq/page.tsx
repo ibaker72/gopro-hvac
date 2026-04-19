@@ -68,7 +68,7 @@ export default function FAQPage() {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-kJB-yYcJsvk?auto=format&fit=crop&w=1920&q=80"
+        imageUrl="/images/heroes/homepage-hero.webp"
         imageAlt="Northern NJ suburban home served by Go Pro Heating and Cooling"
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
