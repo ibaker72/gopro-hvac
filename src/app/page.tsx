@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Phone, CheckCircle, Snowflake, Flame, Wrench, Wind, Settings, Zap, ArrowRight } from 'lucide-react'
+import { Phone, CheckCircle, Snowflake, Flame, Wrench, Wind, Settings, Zap, ArrowRight, Star } from 'lucide-react'
 import TrustBadges from '@/components/TrustBadges'
 import EmergencyBanner from '@/components/EmergencyBanner'
 import EstimateWizard from '@/components/EstimateWizard'
@@ -59,16 +59,16 @@ export default function HomePage() {
             {/* Left: headline + CTAs */}
             <div>
               <div className="inline-flex items-center gap-2 bg-brand-orange/20 text-brand-orange border border-brand-orange/40 px-4 py-2 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
-                🏆 Northern NJ&apos;s #1 Rated HVAC Company
+                <Star size={14} className="text-brand-orange" />
+                4.9-Star Rated · 100+ Verified NJ Reviews
               </div>
               <h1 className="text-5xl md:text-6xl font-black leading-[1.06] mb-6">
                 <span className="text-brand-orange">Clifton NJ</span>
                 <br />HVAC Experts
-                <br />You Can Trust
+                <br />Done Right.
               </h1>
               <p className="text-white/85 text-xl mb-8 leading-relaxed max-w-lg">
-                Fast, honest HVAC service across Northern New Jersey —
-                AC repair, furnace installation &amp; 24/7 emergency service.
+                NJ-licensed technicians. Upfront written quotes. Same-day availability across Northern New Jersey — AC repair, furnace installation &amp; 24/7 emergency dispatch.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <a
@@ -86,7 +86,7 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className="flex flex-wrap gap-5">
-                {['Licensed & Insured', '24/7 Emergency', 'Same-Day Service', 'Free Estimates'].map((badge) => (
+                {['NJ Lic. #19HC00212300', '24/7 Live Dispatch', 'Same-Day Arrival', 'Written Price Guarantee'].map((badge) => (
                   <div key={badge} className="flex items-center gap-2 text-white/90 text-sm font-medium">
                     <CheckCircle size={15} className="text-brand-orange flex-shrink-0" />
                     {badge}
@@ -99,10 +99,10 @@ export default function HomePage() {
             <div className="bg-white/10 backdrop-blur-md border border-white/25 rounded-2xl p-7 shadow-2xl">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-1.5 bg-brand-orange/20 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full text-xs font-bold mb-3">
-                  FREE · No Obligation
+                  No-Cost Estimate · No Commitment
                 </div>
                 <h2 className="text-2xl font-black mb-1">Get Your Free Estimate</h2>
-                <p className="text-white/70 text-sm">Tell us about your project in 60 seconds</p>
+                <p className="text-white/70 text-sm">Get a written quote in under 60 seconds</p>
               </div>
               <Link
                 href="/estimate"
@@ -121,7 +121,7 @@ export default function HomePage() {
               >
                 {COMPANY.phone}
               </a>
-              <p className="text-white/50 text-xs text-center mt-2">Available 24/7 · No overtime charges</p>
+              <p className="text-white/50 text-xs text-center mt-2">Live technicians available 24/7 · No overtime fees</p>
             </div>
           </div>
         </div>

@@ -14,23 +14,23 @@ export default function TrustBadges({ variant = 'light' }: TrustBadgesProps) {
     },
     {
       icon: Star,
-      title: '5-Star Rated',
-      subtitle: '100+ Reviews',
+      title: '4.9★ Rated',
+      subtitle: '100+ Google Reviews',
     },
     {
       icon: Clock,
-      title: '24/7 Emergency',
-      subtitle: 'Always Available',
+      title: '24/7 Live Dispatch',
+      subtitle: 'No Answering Service',
     },
     {
       icon: Award,
-      title: `${COMPANY.yearsInBusiness} Years Experience`,
-      subtitle: 'Serving Northern NJ',
+      title: `${COMPANY.yearsInBusiness} Years`,
+      subtitle: '1,000+ Systems Serviced',
     },
     {
       icon: CheckCircle,
-      title: 'BBB Accredited',
-      subtitle: 'A+ Rating',
+      title: 'BBB A+ Accredited',
+      subtitle: 'Verified Since 2014',
     },
   ]
 
