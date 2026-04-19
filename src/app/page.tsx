@@ -80,7 +80,7 @@ export default function HomePage() {
                 </a>
                 <Link
                   href="/estimate"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white/70 text-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-white hover:text-brand-blue transition-all"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-brand-blue border-2 border-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-brand-blue hover:text-white transition-all"
                 >
                   Get Free Estimate
                 </Link>

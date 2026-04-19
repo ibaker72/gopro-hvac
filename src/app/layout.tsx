@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import StickyCallBar from '@/components/StickyCallBar'
+import StickyMobileCTA from '@/components/StickyMobileCTA'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import LocalBusinessSchema from '@/components/LocalBusinessSchema'
@@ -57,8 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GoogleAnalytics />
         <StickyCallBar />
         <Navbar />
-        <main>{children}</main>
+        <main className="pb-[57px] md:pb-0">{children}</main>
         <Footer />
+        <StickyMobileCTA />
       </body>
     </html>
   )

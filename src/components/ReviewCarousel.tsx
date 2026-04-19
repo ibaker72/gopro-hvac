@@ -97,6 +97,21 @@ export default function ReviewCarousel() {
             <ReviewCard key={review.name} review={review} />
           ))}
         </div>
+
+        <div className="text-center mt-10">
+          <a
+            href="https://www.google.com/maps/place/Go+Pro+Heating+%26+Cooling"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 bg-white border border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-full shadow-sm hover:shadow-md hover:border-slate-300 transition-all text-sm"
+          >
+            <div className="w-4 h-4 rounded-full bg-[#4285F4] flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-[8px] font-bold leading-none">G</span>
+            </div>
+            View all 100+ reviews on Google
+            <span className="text-slate-400">→</span>
+          </a>
+        </div>
       </div>
     </section>
   )
