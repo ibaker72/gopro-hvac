@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 const nextConfig = {
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
@@ -41,11 +43,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://www.google-analytics.com`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://images.unsplash.com https://lh3.googleusercontent.com https://images.pexels.com https://videos.pexels.com https://*.supabase.co",
               "font-src 'self'",
-              "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com",
+              `connect-src 'self'${isDevelopment ? ' ws: http://127.0.0.1:* http://localhost:*' : ''} https://*.supabase.co https://www.google-analytics.com https://www.googletagmanager.com`,
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",
