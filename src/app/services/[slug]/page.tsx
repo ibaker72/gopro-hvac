@@ -11,6 +11,19 @@ import { breadcrumbSchema, serviceSchema } from '@/lib/schema'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goprohvacnj.com'
 
+const SERVICE_IMAGES: Record<string, string> = {
+  'ac-repair':           'https://images.unsplash.com/photo-JsPkVrHMQoo?auto=format&fit=crop&w=1920&q=80',
+  'ac-installation':     'https://images.unsplash.com/photo-JUAVCUMY008?auto=format&fit=crop&w=1920&q=80',
+  'heating-repair':      'https://images.unsplash.com/photo-aPIlltz21OI?auto=format&fit=crop&w=1920&q=80',
+  'furnace-installation':'https://images.unsplash.com/photo-TkcnKFXU1aU?auto=format&fit=crop&w=1920&q=80',
+  'heat-pump':           'https://images.unsplash.com/photo-NUbkugvpD1M?auto=format&fit=crop&w=1920&q=80',
+  'ductless-mini-split': 'https://images.unsplash.com/photo-1KNFO2dpoiM?auto=format&fit=crop&w=1920&q=80',
+  'duct-cleaning':       'https://images.unsplash.com/photo-OGV99Jhhvro?auto=format&fit=crop&w=1920&q=80',
+  'hvac-tune-up':        'https://images.unsplash.com/photo-6dCFBWET48s?auto=format&fit=crop&w=1920&q=80',
+  'emergency-hvac':      'https://images.unsplash.com/photo-E5S7Aks1fFY?auto=format&fit=crop&w=1920&q=80',
+  'commercial-hvac':     'https://images.unsplash.com/photo-vvDUCfhiDpE?auto=format&fit=crop&w=1920&q=80',
+}
+
 interface Props {
   params: Promise<{ slug: string }>
 }
@@ -56,7 +69,7 @@ export default async function ServicePage({ params }: Props) {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80"
+        imageUrl={SERVICE_IMAGES[slug] ?? 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80'}
         imageAlt={`${service.title} service in Northern NJ`}
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
@@ -82,7 +95,7 @@ export default async function ServicePage({ params }: Props) {
             </a>
             <Link
               href="/estimate"
-              className="inline-flex items-center justify-center bg-white/10 border-2 border-white text-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-white hover:text-brand-blue transition-colors"
+              className="inline-flex items-center justify-center bg-white text-brand-blue border-2 border-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-brand-blue hover:text-white transition-all"
             >
               Get Free Estimate
             </Link>

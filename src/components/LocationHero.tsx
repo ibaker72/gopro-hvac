@@ -12,7 +12,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
   return (
     <HeroMedia
       mode="image"
-      imageUrl="https://images.unsplash.com/photo-1570129477492-45c003dc3b7e?auto=format&fit=crop&w=1920&q=80"
+      imageUrl="https://images.unsplash.com/photo-K5KxSL-sT7s?auto=format&fit=crop&w=1920&q=80"
       imageAlt={`Residential neighbourhood in ${city.name}, NJ`}
       overlayOpacity={60}
       className="py-16 px-4 min-h-[420px]"
@@ -57,7 +57,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </a>
           <Link
             href="/estimate"
-            className="inline-flex items-center justify-center gap-2 bg-white/10 border-2 border-white text-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-white hover:text-brand-blue transition-colors"
+            className="inline-flex items-center justify-center gap-2 bg-white text-brand-blue border-2 border-white font-bold text-lg px-7 py-4 rounded-xl hover:bg-brand-blue hover:text-white transition-all"
           >
             Get Free Estimate
           </Link>

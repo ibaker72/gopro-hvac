@@ -68,8 +68,8 @@ export default function FAQPage() {
       {/* Hero */}
       <HeroMedia
         mode="image"
-        imageUrl="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80"
-        imageAlt="NJ homeowner researching HVAC questions"
+        imageUrl="https://images.unsplash.com/photo-kJB-yYcJsvk?auto=format&fit=crop&w=1920&q=80"
+        imageAlt="Northern NJ suburban home served by Go Pro Heating and Cooling"
         overlayOpacity={65}
         gradientClass="bg-gradient-to-br from-brand-blue to-blue-900"
         className="py-14 px-4 min-h-[320px]"
